@@ -6,15 +6,19 @@
 <ul>
 <li> <strong>Total Likes: </strong><%= @blogger.total_likes %> </li>
 <br>
-<li> <strong>Featured Post: </strong> <%= link_to @blogger.featured_post.title, post_path(@blogger.featured_post) %> </li>
+<li> <strong>Featured Post: </strong> <%=  @blogger.posts.blank? ? "This user does not have any posts yet" : link_to(@blogger.featured_post[:title], post_path(@blogger.featured_post)) %> </li>
 <br>
 <li> <strong>Top Destinations: </strong></li>
   <ol>
-    <% @blogger.top_five.each do |destination| %>
-    <li> <%= link_to destination[0].name, destination_path(destination[0]) %> 
-      <ul>
-        <li> Posts by Author: <%= destination[1] %> </li>
-      </ul>
+    <% if @blogger.posts.blank? %>
+      <p> This user has not yet written any posts 🥲 </p>
+    <%else%>
+      <% @blogger.top_five.each do |destination| %>
+      <li> <%= link_to destination[0].name, destination_path(destination[0]) %> 
+        <ul>
+          <li> Posts by Author: <%= destination[1] %> </li>
+        </ul>
+      <% end %>
     <% end %>
   </ol>
 </ul>
