@@ -1,0 +1,19 @@
+<%= render "layouts/header" %>
+
+<h2> Welcome to <strong><%= @destination.name %> </strong> </h2>
+<hr>
+<h3> Average Poster's Age: <%= @destination.average_poster_age%> </h3>
+
+<h3> Featured Post: <%= link_to @destination.featured_post.title, post_path(@destination.featured_post)%> </h3>
+
+<h3> Most Recent Posts: </h3>
+<ul>
+  <% @destination.posts.sort_by(&:created_at).reverse.first(5).each do |post|%>
+    <li> <%= link_to post.title, post_path(post) %> </li>
+    <ul>
+      <li> <%= post.blogger.name %> </li>
+    </ul>
+  <% end %>
+</ul>
+
+

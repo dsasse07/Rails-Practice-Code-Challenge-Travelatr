@@ -1,0 +1,20 @@
+<%= render "layouts/header"%>
+
+<br>
+<h2> Profile Page for <%= @blogger.name %></h2>
+
+<ul>
+<li> <strong>Total Likes: </strong><%= @blogger.total_likes %> </li>
+<br>
+<li> <strong>Featured Post: </strong> <%= link_to @blogger.featured_post.title, post_path(@blogger.featured_post) %> </li>
+<br>
+<li> <strong>Top Destinations: </strong></li>
+  <ol>
+    <% @blogger.top_five.each do |destination| %>
+    <li> <%= link_to destination[0].name, destination_path(destination[0]) %> 
+      <ul>
+        <li> Posts by Author: <%= destination[1] %> </li>
+      </ul>
+    <% end %>
+  </ol>
+</ul>

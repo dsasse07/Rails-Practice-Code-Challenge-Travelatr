@@ -22,13 +22,16 @@ end
     age: (13..100).to_a.sample
   })
 
-  (2..6).to_a.sample.times do 
+
+  (10..20).to_a.sample.times do 
     Post.create({
       title: Faker::Hipster.sentence(3),
-      content: Faker::Hipster.paragraphs(4),
-      likes: 0,
+      content: Faker::Hipster.paragraphs(4).join,
+      likes: (0..40).to_a.sample,
       blogger: blogger,
-      destination: Destination.all.sample
+      destination: Destination.all.sample,
     })
+
   end
+  blogger.posts.each{ | post | post.update( created_at: post.created_at - rand( 0..1000 ).days ) }
 end

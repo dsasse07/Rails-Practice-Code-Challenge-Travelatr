@@ -1,0 +1,11 @@
+<%= render "layouts/header" %>
+
+<h2> <%= @post.title %> </h2>
+<h3> <%= link_to @post.author_name, blogger_path(@post.blogger) %> </h3>
+<h3> Location: <%= link_to @post.destination_name, destination_path(@post.destination) %></h3>
+<h3> <%= @post.created_at.strftime("%B %d, %Y") %></h3>
+<h3> Likes: <%= @post.likes %> <%= button_to "Like", like_post_path(@post), method: 'patch' %> <%= button_to "Love it", love_post_path(@post), method: 'patch' %> </h3>
+<hr>
+<p>
+<%= @post.content %>
+</p>

@@ -1,0 +1,15 @@
+
+<%= render "layouts/header" %>
+
+<h2> Our Bloggers: </h2>
+
+<ul>
+  <% @bloggers.each do |b| %>
+    <li>
+      <%= link_to b.name, blogger_path(b)%>
+    </li>
+    <% end %>
+</ul>
+
+<h2><%= link_to 'Register as a Blogger!', new_blogger_path %></h2>
+
