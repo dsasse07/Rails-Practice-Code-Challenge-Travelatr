@@ -1,23 +1,41 @@
-<% if flash[:messages] %>
-  <% flash[:messages].each do |message|%>
-    <li> <%= message %> </li>
-  <% end %>
-<% end %>
+<%# <% if flash[:messages] %>
+  <%# <% flash[:messages].each do |message|%>
+    <%# <li> <%= message %> </li>
+  <%# <% end %>
+<%# <% end %>
 <br>
 <hr>
 <br>
 <%= form_for @post do |f| %>
+<p>
+  <% unless flash[:messages].nil? || flash[:messages][:title].blank? %>
+    <% flash[:messages][:title].each do |message| %>
+      <p>Post title <%= message %></p>
+    <% end %>
+  <% end %>
   <%= f.label :title %>
   <%= f.text_field :title %>
+</p>
   <br>
+<p>
+    <% unless flash[:messages].nil? || flash[:messages][:content].blank? %>
+      <% flash[:messages][:content].each do |message| %>
+        <p>Post content <%= message %></p>
+      <% end %>
+    <% end %>
   <%= f.label :content %>
   <%= f.text_area :content %>
+</p>
   <br>
+<p>
   <%= f.label :blogger_id %>
   <%= f.collection_select :blogger_id, Blogger.all, :id, :name %>
+</p>
   <br>
+<p>
   <%= f.label :destination_id %>
   <%= f.collection_select :destination_id, Destination.all, :id, :name %>
+</p>
   <br>
   <%= f.submit %>
 <% end %>

@@ -15,7 +15,8 @@ class PostsController < ApplicationController
     if @post.valid?
       redirect_to post_path(@post)
     else
-      flash[:messages] = @post.errors.full_messages
+      flash[:messages] = @post.errors
+      # byebug
       render :new
     end
   end
